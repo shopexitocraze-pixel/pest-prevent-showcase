@@ -2,7 +2,34 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import heroHome from "@/assets/hero-home.jpg";
 import { Reveal } from "@/components/Reveal";
-import { BugOff, Bug, Wind, ShieldAlert, Car, Home, Building2, Factory, BedDouble, Hospital, GraduationCap, Utensils, Wine, CheckCircle2, MessageCircle, Quote, Star, ShieldCheck, PhoneCall, ChevronDown, Menu, X } from "lucide-react";
+import { WorkGalleryModal } from "@/components/WorkGalleryModal";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
+import { getGalleryData } from "@/lib/gallery";
+import {
+  BugOff,
+  Bug,
+  Wind,
+  ShieldAlert,
+  Car,
+  Home,
+  Building2,
+  Factory,
+  BedDouble,
+  Hospital,
+  GraduationCap,
+  Utensils,
+  Wine,
+  CheckCircle2,
+  Quote,
+  Star,
+  ShieldCheck,
+  PhoneCall,
+  ChevronDown,
+  Menu,
+  X,
+  Images,
+  Sparkles,
+} from "lucide-react";
 
 const PHONE = "+917010976603";
 const PHONE_DISPLAY = "+91 70109 76603";
@@ -17,7 +44,10 @@ export const Route = createFileRoute("/")({
         content:
           "Safe, eco-friendly and guaranteed pest control in Chennaic since 2012. Termite, cockroach, mosquito, rat and car anti-rat treatments. Book a free inspection.",
       },
-      { property: "og:title", content: "Global Elite Pest Management | Chennai's Trusted Pest Control" },
+      {
+        property: "og:title",
+        content: "Global Elite Pest Management | Chennai's Trusted Pest Control",
+      },
       {
         property: "og:description",
         content:
@@ -35,10 +65,10 @@ export const Route = createFileRoute("/")({
 function Logo() {
   return (
     <a href="#top" className="group flex items-center gap-2">
-      <img 
-        src="/profile_img.png" 
-        alt="Global Elite Logo" 
-        className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+      <img
+        src="/profile_img.png"
+        alt="Global Elite Logo"
+        className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
       />
       <span className="text-lg font-bold tracking-tighter text-primary">
         GLOBAL<span className="font-light text-foreground">ELITE</span>
@@ -154,7 +184,7 @@ function Nav() {
                   rel="noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-[#25D366]/30 bg-[#25D366]/10 py-2.5 text-xs font-semibold text-[#25D366] hover:bg-[#25D366]/20"
                 >
-                  <MessageCircle className="size-3.5" />
+                  <WhatsAppIcon className="size-3.5 fill-current" />
                   WhatsApp
                 </a>
               </div>
@@ -166,7 +196,15 @@ function Nav() {
   );
 }
 
-function Counter({ to, suffix = "", decimals = 0 }: { to: number; suffix?: string; decimals?: number }) {
+function Counter({
+  to,
+  suffix = "",
+  decimals = 0,
+}: {
+  to: number;
+  suffix?: string;
+  decimals?: number;
+}) {
   const ref = useRef<HTMLSpanElement>(null);
   const [value, setValue] = useState(0);
 
@@ -229,8 +267,8 @@ function Hero() {
 
           <Reveal delay={180}>
             <p className="mb-8 sm:mb-10 max-w-lg text-pretty text-base sm:text-lg leading-relaxed text-muted-foreground">
-              Protect your home and business with safe, eco-friendly and guaranteed pest control solutions — delivered
-              by certified specialists with over a decade of experience.
+              Protect your home and business with safe, eco-friendly and guaranteed pest control
+              solutions — delivered by certified specialists with over a decade of experience.
             </p>
           </Reveal>
 
@@ -247,9 +285,10 @@ function Hero() {
                   href={WHATSAPP}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex-1 sm:flex-initial text-center rounded-full border border-border px-5 py-3 sm:px-6 sm:py-4 text-sm font-semibold transition-all hover:border-primary/40 hover:bg-primary/5"
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 text-center rounded-full border border-[#25D366]/30 bg-[#25D366]/10 px-5 py-3 sm:px-6 sm:py-4 text-sm font-semibold text-[#25D366] transition-all hover:bg-[#25D366]/20 hover:border-[#25D366]/50"
                 >
-                  WhatsApp Now
+                  <WhatsAppIcon className="size-4 shrink-0 fill-current" />
+                  <span>WhatsApp Now</span>
                 </a>
                 <a
                   href={`tel:${PHONE}`}
@@ -264,7 +303,9 @@ function Hero() {
           <Reveal delay={340}>
             <div className="mt-6 sm:mt-8 flex items-center gap-3">
               <span className="text-accent">★★★★★</span>
-              <span className="text-xs font-medium text-muted-foreground">5.0 · 14 Google Reviews</span>
+              <span className="text-xs font-medium text-muted-foreground">
+                5.0 · 14 Google Reviews
+              </span>
             </div>
           </Reveal>
         </div>
@@ -285,7 +326,9 @@ function Hero() {
               13+
             </div>
             <div>
-              <div className="text-xs sm:text-sm font-bold text-card-foreground">Years of trusted service</div>
+              <div className="text-xs sm:text-sm font-bold text-card-foreground">
+                Years of trusted service
+              </div>
               <div className="text-[9px] sm:text-[10px] uppercase tracking-tighter text-muted-foreground">
                 Serving Chennai since 2012
               </div>
@@ -421,6 +464,9 @@ const SERVICES = [
 ];
 
 function Services() {
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const galleryData = getGalleryData();
+
   return (
     <section id="services" className="relative overflow-hidden bg-card py-16 sm:py-32">
       <div className="pointer-events-none absolute inset-x-0 -top-40 -z-10 h-[42rem] aurora opacity-20" />
@@ -434,6 +480,10 @@ function Services() {
             <h3 className="max-w-3xl text-balance text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-card-foreground">
               Complete pest protection, for every environment.
             </h3>
+            <p className="mt-4 max-w-2xl text-pretty text-base sm:text-lg text-muted-foreground">
+              Explore our specialized treatments delivered by certified technicians across homes,
+              commercial spaces, and industrial facilities in Chennai.
+            </p>
           </div>
         </Reveal>
 
@@ -456,16 +506,121 @@ function Services() {
                       <span>{tag}</span>
                     </span>
                   </div>
-                  <h4 className="mb-2 text-base sm:text-lg font-bold tracking-tight text-card-foreground transition-colors group-hover:text-primary">{title}</h4>
+                  <h4 className="mb-2 text-base sm:text-lg font-bold tracking-tight text-card-foreground transition-colors group-hover:text-primary">
+                    {title}
+                  </h4>
                   <p className="mb-6 text-sm leading-relaxed text-muted-foreground">{desc}</p>
                 </div>
-                <a href="#contact" className="mt-auto inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-wide text-primary opacity-80 transition-all hover:opacity-100 group-hover:gap-3 py-1">
-                  Book Service <span className="transition-transform group-hover:translate-x-1">→</span>
+                <a
+                  href="#contact"
+                  className="mt-auto inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-wide text-primary opacity-80 transition-all hover:opacity-100 group-hover:gap-3 py-1"
+                >
+                  Book Service{" "}
+                  <span className="transition-transform group-hover:translate-x-1">→</span>
                 </a>
               </div>
             </Reveal>
           ))}
+
+          {/* Work Gallery Card filling the side of Restro Bar */}
+          <Reveal
+            delay={100}
+            className="col-span-1 sm:col-span-1 lg:col-span-2 xl:col-span-3 h-full"
+          >
+            <div className="card-lift group relative flex h-full min-h-[380px] flex-col justify-between overflow-hidden rounded-2xl sm:rounded-[2rem] border border-border bg-card p-6 sm:p-8 shadow-xl transition-all duration-300 hover:border-primary hover:shadow-2xl">
+              {/* Right side background image with technician spraying */}
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-full sm:w-3/5 lg:w-1/2 overflow-hidden">
+                <img
+                  src="/services/spray-technician.jpg"
+                  alt=""
+                  loading="lazy"
+                  className="h-full w-full object-cover object-right opacity-5 sm:opacity-100 dark:opacity-100 transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+                {/* Gradient mask blending to card background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-card via-card/90 to-card/30 sm:to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent pointer-events-none" />
+              </div>
+
+              {/* Decorative aura & subtle grid lines */}
+              <div className="pointer-events-none absolute -left-16 -top-16 size-48 rounded-full bg-primary/10 blur-3xl" />
+              <div className="pointer-events-none absolute inset-0 grid-lines opacity-15" />
+
+              <div className="relative z-10 flex flex-col justify-between h-full">
+                <div>
+                  {/* Badge */}
+                  <div className="mb-3 sm:mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1.5 font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-primary backdrop-blur-md">
+                    <Images className="size-3.5 text-primary" />
+                    <span>Field Work Gallery</span>
+                  </div>
+
+                  {/* Heading */}
+                  <h4 className="mb-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-card-foreground">
+                    Real Treatment{" "}
+                    <span className="text-primary font-black">Evidence & Results</span>
+                  </h4>
+
+                  {/* Subtitle */}
+                  <p className="mb-6 max-w-xl text-xs sm:text-sm leading-relaxed text-muted-foreground">
+                    Browse verified site photos from our recent termite drillings, commercial
+                    kitchen treatments, car anti-rat sprays, and industrial sanitizations across
+                    Chennai.
+                  </p>
+
+                  {/* Thumbnail Row */}
+                  <div className="mb-6 flex flex-wrap items-center gap-2.5 sm:gap-3">
+                    {galleryData.images.slice(0, 6).map((img, idx) => {
+                      return (
+                        <div
+                          key={img.id || idx}
+                          onClick={() => setGalleryOpen(true)}
+                          className="group/thumb relative size-11 sm:size-14 overflow-hidden rounded-xl border border-border/80 transition-all duration-300 hover:scale-110 hover:border-primary/60 shadow-md cursor-pointer outline-none focus:outline-none"
+                          title={img.title}
+                        >
+                          <img
+                            src={img.thumbnailUrl || img.url}
+                            alt=""
+                            loading="lazy"
+                            className="h-full w-full object-cover transition-transform duration-300 group-hover/thumb:scale-110"
+                          />
+                        </div>
+                      );
+                    })}
+                    {galleryData.images.length > 6 && (
+                      <button
+                        type="button"
+                        onClick={() => setGalleryOpen(true)}
+                        className="flex size-11 sm:size-14 items-center justify-center rounded-xl border border-border bg-muted/60 font-mono text-xs font-bold text-muted-foreground transition-all hover:text-primary hover:border-primary/60 hover:bg-primary/10 cursor-pointer outline-none focus:outline-none"
+                        title="View all photos"
+                      >
+                        +{galleryData.images.length - 6}
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Bottom Bar: Verified count on left, View Work Gallery button on right */}
+                <div className="pt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-border/80">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-muted-foreground">
+                    <CheckCircle2 className="size-4 text-primary shrink-0" />
+                    <span>{galleryData.images.length} verified project photos</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setGalleryOpen(true)}
+                    className="group/btn sweep-on-hover relative inline-flex items-center gap-2.5 rounded-full border border-primary/40 bg-primary/10 px-6 py-2.5 font-mono text-xs sm:text-sm font-bold text-primary shadow-sm backdrop-blur transition-all duration-300 hover:border-primary hover:bg-primary hover:text-primary-foreground hover:shadow-lg active:scale-95 cursor-pointer outline-none focus:outline-none focus-visible:outline-none"
+                  >
+                    <Images className="size-4 transition-transform group-hover/btn:scale-110" />
+                    <span>View Work Gallery</span>
+                    <span className="transition-transform group-hover/btn:translate-x-1">→</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </div>
+
+        <WorkGalleryModal open={galleryOpen} onOpenChange={setGalleryOpen} />
       </div>
     </section>
   );
@@ -488,13 +643,18 @@ function About() {
       <div className="mx-auto grid max-w-7xl items-center gap-10 sm:gap-16 px-4 sm:px-6 lg:grid-cols-2">
         <Reveal>
           <div>
-            <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-primary">About Us</h2>
-            <h3 className="mb-6 sm:mb-8 text-3xl sm:text-4xl font-bold tracking-tight">A decade of protection, engineered for Chennai.</h3>
+            <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-primary">
+              About Us
+            </h2>
+            <h3 className="mb-6 sm:mb-8 text-3xl sm:text-4xl font-bold tracking-tight">
+              A decade of protection, engineered for Chennai.
+            </h3>
             <p className="mb-8 sm:mb-10 text-sm sm:text-base leading-relaxed text-muted-foreground">
-              Global Elite Pest Management has been providing professional pest control services since 2012. We
-              specialize in termite treatment, cockroach control, mosquito control, rodent management, and car anti-rat
-              treatment. Using safe, eco-friendly methods and advanced technology, we deliver reliable protection for
-              residential and commercial properties throughout Chennai.
+              Global Elite Pest Management has been providing professional pest control services
+              since 2012. We specialize in termite treatment, cockroach control, mosquito control,
+              rodent management, and car anti-rat treatment. Using safe, eco-friendly methods and
+              advanced technology, we deliver reliable protection for residential and commercial
+              properties throughout Chennai.
             </p>
             <div className="flex flex-wrap gap-2 sm:gap-3">
               {HIGHLIGHTS.map((h) => (
@@ -520,7 +680,10 @@ function About() {
               { to: 98, suffix: "%", label: "Customer Retention" },
               { to: 30, suffix: "min", label: "Response Time" },
             ].map((s) => (
-              <div key={s.label} className="card-lift group relative overflow-hidden rounded-2xl sm:rounded-[2rem] border border-border bg-background/50 p-4 sm:p-6 text-center hover:border-primary/40 hover:bg-card">
+              <div
+                key={s.label}
+                className="card-lift group relative overflow-hidden rounded-2xl sm:rounded-[2rem] border border-border bg-background/50 p-4 sm:p-6 text-center hover:border-primary/40 hover:bg-card"
+              >
                 <div className="pointer-events-none absolute -inset-6 -z-10 bg-gradient-to-tr from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 blur-xl" />
                 <div className="text-2xl sm:text-3xl font-extrabold tracking-tight text-primary transition-transform duration-300 group-hover:scale-110">
                   <Counter to={s.to} suffix={s.suffix} decimals={s.decimals ?? 0} />
@@ -553,8 +716,12 @@ function Process() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
           <div className="mb-10 sm:mb-16 max-w-2xl">
-            <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-primary">How It Works</h2>
-            <h3 className="text-3xl sm:text-4xl font-bold tracking-tight">A seamless 6-step process.</h3>
+            <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-primary">
+              How It Works
+            </h2>
+            <h3 className="text-3xl sm:text-4xl font-bold tracking-tight">
+              A seamless 6-step process.
+            </h3>
           </div>
         </Reveal>
         <div className="grid gap-5 sm:gap-12 md:grid-cols-2 lg:grid-cols-3">
@@ -562,9 +729,13 @@ function Process() {
             <Reveal key={number} delay={(i % 3) * 120}>
               <div className="card-lift group relative h-full overflow-hidden rounded-2xl sm:rounded-[2rem] border border-border bg-background/50 p-6 sm:p-8 hover:border-primary/40 hover:bg-card">
                 <div className="pointer-events-none absolute -right-16 -top-16 size-40 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:animate-pulse group-hover:opacity-100" />
-                <span className="absolute top-4 right-6 font-mono text-5xl sm:text-6xl font-black text-primary/15 sm:text-primary/20 transition-colors group-hover:text-primary/30">{number}</span>
+                <span className="absolute top-4 right-6 font-mono text-5xl sm:text-6xl font-black text-primary/15 sm:text-primary/20 transition-colors group-hover:text-primary/30">
+                  {number}
+                </span>
                 <div className="relative mt-2 sm:mt-4">
-                  <h5 className="mb-2 sm:mb-4 text-base sm:text-lg font-bold text-card-foreground transition-colors group-hover:text-primary">{title}</h5>
+                  <h5 className="mb-2 sm:mb-4 text-base sm:text-lg font-bold text-card-foreground transition-colors group-hover:text-primary">
+                    {title}
+                  </h5>
                   <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
                 </div>
               </div>
@@ -577,11 +748,26 @@ function Process() {
 }
 
 const REVIEWS = [
-  ["Excellent termite treatment. The team was professional, punctual and thorough. Highly recommend!", "Karthik R."],
-  ["Best pest control in Ambattur. Solved our cockroach problem in one visit. Very safe for kids.", "Priya S."],
-  ["Rat problem in my car — fixed completely. Their herbal spray really works. 5 stars!", "Ravi Kumar"],
-  ["13 years of trust. My family has been using their service since 2015. Never disappointed.", "Anitha M."],
-  ["Highly professional team, eco-friendly chemicals, and reasonable pricing. Truly elite service.", "Suresh V."],
+  [
+    "Excellent termite treatment. The team was professional, punctual and thorough. Highly recommend!",
+    "Karthik R.",
+  ],
+  [
+    "Best pest control in Ambattur. Solved our cockroach problem in one visit. Very safe for kids.",
+    "Priya S.",
+  ],
+  [
+    "Rat problem in my car — fixed completely. Their herbal spray really works. 5 stars!",
+    "Ravi Kumar",
+  ],
+  [
+    "13 years of trust. My family has been using their service since 2015. Never disappointed.",
+    "Anitha M.",
+  ],
+  [
+    "Highly professional team, eco-friendly chemicals, and reasonable pricing. Truly elite service.",
+    "Suresh V.",
+  ],
   ["The mosquito treatment made a huge difference. Follow-up support was excellent.", "Deepa L."],
 ] as const;
 
@@ -591,8 +777,12 @@ function Testimonials() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
           <div className="mb-10 sm:mb-16 max-w-2xl">
-            <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-primary">5.0 · 14 Google Reviews</h2>
-            <h3 className="text-3xl sm:text-4xl font-bold tracking-tight">Loved by customers across Chennai.</h3>
+            <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-primary">
+              5.0 · 14 Google Reviews
+            </h2>
+            <h3 className="text-3xl sm:text-4xl font-bold tracking-tight">
+              Loved by customers across Chennai.
+            </h3>
           </div>
         </Reveal>
         <div className="grid gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -609,7 +799,9 @@ function Testimonials() {
                     <Star className="size-3.5 sm:size-4 fill-current" />
                     <Star className="size-3.5 sm:size-4 fill-current" />
                   </div>
-                  <blockquote className="mb-6 sm:mb-8 text-sm leading-relaxed text-muted-foreground">"{quote}"</blockquote>
+                  <blockquote className="mb-6 sm:mb-8 text-sm leading-relaxed text-muted-foreground">
+                    "{quote}"
+                  </blockquote>
                   <figcaption className="mt-auto flex items-center gap-3">
                     <span className="flex size-9 sm:size-10 items-center justify-center rounded-full bg-primary/10 font-bold text-primary ring-2 ring-transparent transition-all group-hover:bg-primary/20 group-hover:ring-primary/30 text-sm">
                       {name.charAt(0)}
@@ -661,7 +853,9 @@ function Faq() {
         <Reveal>
           <div className="mb-8 sm:mb-12 text-center">
             <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-primary">FAQ</h2>
-            <h3 className="text-3xl sm:text-4xl font-bold tracking-tight text-card-foreground">Questions, answered.</h3>
+            <h3 className="text-3xl sm:text-4xl font-bold tracking-tight text-card-foreground">
+              Questions, answered.
+            </h3>
           </div>
         </Reveal>
         <div className="space-y-3 sm:space-y-4">
@@ -674,7 +868,9 @@ function Faq() {
                     <ChevronDown className="size-3.5 sm:size-4" />
                   </span>
                 </summary>
-                <p className="mt-3 sm:mt-4 text-xs sm:text-sm leading-relaxed text-muted-foreground animate-reveal">{a}</p>
+                <p className="mt-3 sm:mt-4 text-xs sm:text-sm leading-relaxed text-muted-foreground animate-reveal">
+                  {a}
+                </p>
               </details>
             </Reveal>
           ))}
@@ -692,8 +888,12 @@ function Contact() {
         <div className="grid gap-10 lg:gap-16 lg:grid-cols-2">
           <Reveal>
             <div>
-              <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-primary">Get in touch</h2>
-              <h3 className="mb-4 sm:mb-6 text-3xl sm:text-4xl font-bold tracking-tight">Book your free inspection.</h3>
+              <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-primary">
+                Get in touch
+              </h2>
+              <h3 className="mb-4 sm:mb-6 text-3xl sm:text-4xl font-bold tracking-tight">
+                Book your free inspection.
+              </h3>
               <p className="mb-8 sm:mb-10 text-sm sm:text-base text-muted-foreground">
                 Get an on-site assessment and a no-obligation quote within 24 hours.
               </p>
@@ -706,8 +906,12 @@ function Contact() {
                   <div className="mb-3 sm:mb-4 inline-flex size-10 sm:size-12 items-center justify-center rounded-xl sm:rounded-2xl bg-primary/10 text-primary transition-transform group-hover:scale-110 group-hover:bg-primary/20">
                     <PhoneCall className="size-4 sm:size-5" />
                   </div>
-                  <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Call Us</div>
-                  <div className="mt-1 sm:mt-2 text-sm sm:text-base font-bold text-card-foreground group-hover:text-primary transition-colors">{PHONE_DISPLAY}</div>
+                  <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                    Call Us
+                  </div>
+                  <div className="mt-1 sm:mt-2 text-sm sm:text-base font-bold text-card-foreground group-hover:text-primary transition-colors">
+                    {PHONE_DISPLAY}
+                  </div>
                 </a>
                 <a
                   href={WHATSAPP}
@@ -716,10 +920,14 @@ function Contact() {
                   className="card-lift group rounded-2xl sm:rounded-[2rem] border border-border bg-background/50 p-4 sm:p-6 hover:border-[#25D366]/40 hover:bg-card"
                 >
                   <div className="mb-3 sm:mb-4 inline-flex size-10 sm:size-12 items-center justify-center rounded-xl sm:rounded-2xl bg-[#25D366]/10 text-[#25D366] transition-transform group-hover:scale-110 group-hover:bg-[#25D366]/20">
-                    <MessageCircle className="size-4 sm:size-5" />
+                    <WhatsAppIcon className="size-5 sm:size-6 fill-current" />
                   </div>
-                  <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">WhatsApp</div>
-                  <div className="mt-1 sm:mt-2 text-sm sm:text-base font-bold text-card-foreground group-hover:text-[#25D366] transition-colors">Chat with us now</div>
+                  <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                    WhatsApp
+                  </div>
+                  <div className="mt-1 sm:mt-2 text-sm sm:text-base font-bold text-card-foreground group-hover:text-[#25D366] transition-colors">
+                    Chat with us now
+                  </div>
                 </a>
               </div>
 
@@ -740,9 +948,14 @@ function Contact() {
 
           <Reveal delay={150}>
             <div className="rounded-2xl sm:rounded-3xl bg-card p-5 sm:p-10 shadow-xl ring-1 ring-border">
-              <form className="grid grid-cols-2 gap-4 sm:gap-6" onSubmit={(e) => e.preventDefault()}>
+              <form
+                className="grid grid-cols-2 gap-4 sm:gap-6"
+                onSubmit={(e) => e.preventDefault()}
+              >
                 <div className="col-span-2 md:col-span-1">
-                  <label className="mb-2 block font-mono text-[10px] uppercase text-muted-foreground">Name</label>
+                  <label className="mb-2 block font-mono text-[10px] uppercase text-muted-foreground">
+                    Name
+                  </label>
                   <input
                     type="text"
                     className="w-full rounded-lg border-none bg-secondary px-4 py-3 text-sm transition-all focus:ring-2 focus:ring-primary/30"
@@ -750,7 +963,9 @@ function Contact() {
                   />
                 </div>
                 <div className="col-span-2 md:col-span-1">
-                  <label className="mb-2 block font-mono text-[10px] uppercase text-muted-foreground">Phone</label>
+                  <label className="mb-2 block font-mono text-[10px] uppercase text-muted-foreground">
+                    Phone
+                  </label>
                   <input
                     type="tel"
                     className="w-full rounded-lg border-none bg-secondary px-4 py-3 text-sm transition-all focus:ring-2 focus:ring-primary/30"
@@ -758,7 +973,9 @@ function Contact() {
                   />
                 </div>
                 <div className="col-span-2 md:col-span-1">
-                  <label className="mb-2 block font-mono text-[10px] uppercase text-muted-foreground">Location</label>
+                  <label className="mb-2 block font-mono text-[10px] uppercase text-muted-foreground">
+                    Location
+                  </label>
                   <input
                     type="text"
                     className="w-full rounded-lg border-none bg-secondary px-4 py-3 text-sm transition-all focus:ring-2 focus:ring-primary/30"
@@ -776,7 +993,9 @@ function Contact() {
                   </select>
                 </div>
                 <div className="col-span-2">
-                  <label className="mb-2 block font-mono text-[10px] uppercase text-muted-foreground">Message</label>
+                  <label className="mb-2 block font-mono text-[10px] uppercase text-muted-foreground">
+                    Message
+                  </label>
                   <textarea
                     rows={4}
                     className="w-full rounded-lg border-none bg-secondary px-4 py-3 text-sm transition-all focus:ring-2 focus:ring-primary/30"
@@ -810,7 +1029,13 @@ function Footer() {
           <a href={`tel:${PHONE}`} className="text-primary hover:underline">
             Call
           </a>
-          <a href={WHATSAPP} target="_blank" rel="noreferrer" className="text-primary hover:underline">
+          <a
+            href={WHATSAPP}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 text-primary hover:underline hover:text-[#25D366] transition-colors"
+          >
+            <WhatsAppIcon className="size-4 fill-current" />
             WhatsApp
           </a>
         </div>
@@ -828,10 +1053,10 @@ function FloatingWhatsApp() {
       href={WHATSAPP}
       target="_blank"
       rel="noreferrer"
-      className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex size-12 sm:size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl shadow-[#25D366]/20 transition-all hover:-translate-y-2 hover:scale-110 hover:shadow-2xl hover:shadow-[#25D366]/40 active:scale-95"
+      className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex size-12 sm:size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl shadow-[#25D366]/30 transition-all hover:-translate-y-2 hover:scale-110 hover:shadow-2xl hover:shadow-[#25D366]/50 active:scale-95"
       aria-label="Chat on WhatsApp"
     >
-      <MessageCircle className="size-6 sm:size-7" />
+      <WhatsAppIcon className="size-6 sm:size-7 fill-white" />
     </a>
   );
 }
