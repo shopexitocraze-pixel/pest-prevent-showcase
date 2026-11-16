@@ -7,110 +7,12 @@ export interface GalleryImage {
   isDrive: boolean;
 }
 
-// Fallback images from verified completed pest control projects
-const DEFAULT_GALLERY_ITEMS: Omit<GalleryImage, "id">[] = [
-  {
-    url: "/services/termite.jpg",
-    thumbnailUrl: "/services/termite.jpg",
-    title: "Anti-Termite Drilling & Injection",
-    description:
-      "Sub-slab drilling and high-pressure chemical barrier treatment for residential foundation.",
-    isDrive: false,
-  },
-  {
-    url: "/services/residential.jpg",
-    thumbnailUrl: "/services/residential.jpg",
-    title: "Complete Home Disinfection & Shield",
-    description:
-      "Full interior treatment targeting hidden pest harborage in apartments and independent villas.",
-    isDrive: false,
-  },
-  {
-    url: "/services/commercial.jpg",
-    thumbnailUrl: "/services/commercial.jpg",
-    title: "Corporate IT Park Pest Maintenance",
-    description: "Scheduled weekend pest management across multi-floor commercial office space.",
-    isDrive: false,
-  },
-  {
-    url: "/services/factory.jpg",
-    thumbnailUrl: "/services/factory.jpg",
-    title: "Industrial Warehouse Pest Exclusion",
-    description:
-      "Perimeter bait stations and barrier spray for high-capacity manufacturing warehouse.",
-    isDrive: false,
-  },
-  {
-    url: "/services/restaurant.jpg",
-    thumbnailUrl: "/services/restaurant.jpg",
-    title: "HACCP & FSSAI Commercial Kitchen Treatment",
-    description:
-      "Food-grade cockroach gel baiting and deep drain sanitation in restaurant kitchen.",
-    isDrive: false,
-  },
-  {
-    url: "/services/hospital.jpg",
-    thumbnailUrl: "/services/hospital.jpg",
-    title: "Sterile Healthcare Pest Control",
-    description:
-      "Low-toxicity, non-allergenic disinfection protocol across hospital wards and clinical areas.",
-    isDrive: false,
-  },
-  {
-    url: "/services/mosquito.jpg",
-    thumbnailUrl: "/services/mosquito.jpg",
-    title: "Outdoor Thermal Fogging & Larvicide",
-    description:
-      "Community outdoor fogging targeting mosquito breeding hotspots and drainage gutters.",
-    isDrive: false,
-  },
-  {
-    url: "/services/rat.jpg",
-    thumbnailUrl: "/services/rat.jpg",
-    title: "Tamper-Resistant Rodent Bait Stations",
-    description:
-      "Rodent exclusion barriers and heavy-duty bait boxes installed along building perimeter.",
-    isDrive: false,
-  },
-  {
-    url: "/services/car.jpg",
-    thumbnailUrl: "/services/car.jpg",
-    title: "Engine Bay Anti-Rat Repellent Treatment",
-    description:
-      "Automobile wire-harness protection and ultrasonic repellent spray for luxury vehicles.",
-    isDrive: false,
-  },
-  {
-    url: "/services/cockroach.jpg",
-    thumbnailUrl: "/services/cockroach.jpg",
-    title: "Odorless Gel Baiting Treatment",
-    description:
-      "Targeted dot application of odorless German cockroach gel in modular kitchen cabinets.",
-    isDrive: false,
-  },
-  {
-    url: "/services/school.jpg",
-    thumbnailUrl: "/services/school.jpg",
-    title: "Child-Safe School & Campus Sanitation",
-    description:
-      "Weekend treatment using non-toxic eco-certified formulations for educational facilities.",
-    isDrive: false,
-  },
-  {
-    url: "/services/restro-bar.jpg",
-    thumbnailUrl: "/services/restro-bar.jpg",
-    title: "Discreet Bar & Lounge Pest Proofing",
-    description:
-      "Night-shift discreet service protecting beverage inventory and bar counter areas.",
-    isDrive: false,
-  },
-];
-
 // Known Drive file metadata mapping
 const KNOWN_DRIVE_PHOTOS: Record<string, { title: string; description: string }> = {
   "1rrNlnJK7d3ys1fZgmTINkqYwyNP0XlZZ": {
     title: "Sub-Slab Termite Chemical Barrier Drilling",
-    description: "Deep chemical injection creating an impenetrable barrier beneath residential floors.",
+    description:
+      "Deep chemical injection creating an impenetrable barrier beneath residential floors.",
   },
   "12i7LPRKypg0ImFQqD-Ud-G0G3gn52IFb": {
     title: "Commercial Kitchen Grease & Pest Sanitization",
@@ -118,31 +20,38 @@ const KNOWN_DRIVE_PHOTOS: Record<string, { title: string; description: string }>
   },
   "1JURSZJy4SkiM1KWBOXzQDVTHIe-66TF9": {
     title: "Exterior Perimeter Shield Spraying",
-    description: "Targeted perimeter barrier preventing pest ingress along boundary walls and foundations.",
+    description:
+      "Targeted perimeter barrier preventing pest ingress along boundary walls and foundations.",
   },
   "18getJXTefi-MOWF9Sw2sSx5agtgNtDWC": {
     title: "Automotive Anti-Rat Wiring Protection",
-    description: "Ultrasonic and bitterant repellent application safeguarding car engine wiring harnesses.",
+    description:
+      "Ultrasonic and bitterant repellent application safeguarding car engine wiring harnesses.",
   },
   "1eTG8oRwqeSJqoo_HIw2XTaXhrQOF5OXz": {
     title: "Hospital & Healthcare Sterile Area Disinfection",
-    description: "Medical-grade odorless treatment compliant with stringent clinical safety standards.",
+    description:
+      "Medical-grade odorless treatment compliant with stringent clinical safety standards.",
   },
   "1yBlMEPFRZJai8_vB0e_lMMEavgTcbjL0": {
     title: "Targeted Cockroach Gel Bait Application",
-    description: "Precision dot baiting reaching deep cabinet crevices with zero disruption to daily routine.",
+    description:
+      "Precision dot baiting reaching deep cabinet crevices with zero disruption to daily routine.",
   },
   "1MNxE-bh819YLSGV021e6u-g4f36qq_Iv": {
     title: "Industrial Warehouse Pest Bait Station Check",
-    description: "Tamper-resistant perimeter monitoring stations defending large manufacturing floor space.",
+    description:
+      "Tamper-resistant perimeter monitoring stations defending large manufacturing floor space.",
   },
   "1Y5NC2bs9G3QCVaiNoRIBuYcHYHYDZ0_0": {
     title: "Outdoor Mosquito Thermal Fogging Treatment",
-    description: "High-density thermal fogging clearing outdoor foliage and stormwater breeding pockets.",
+    description:
+      "High-density thermal fogging clearing outdoor foliage and stormwater breeding pockets.",
   },
   "1yIYK8vPWuZerN8Zj278g6pOKO_qBYeqw": {
     title: "Pre-Construction Termite Reticulation Piping",
-    description: "Underground perforated piping installation for lifetime periodic chemical recharge.",
+    description:
+      "Underground perforated piping installation for lifetime periodic chemical recharge.",
   },
 };
 
@@ -160,6 +69,29 @@ const KNOWN_DRIVE_FOLDERS: Record<string, string[]> = {
     "1yIYK8vPWuZerN8Zj278g6pOKO_qBYeqw",
   ],
 };
+
+// Default Drive folder — used as the gallery fallback whenever VITE_GALLERY_IMAGES
+// is missing (e.g. fresh clone, CI/deploy build without .env) so the section never
+// falls back to unrelated sample photos.
+const FALLBACK_DRIVE_FOLDER_ID = "1jYmUGxQUBkklwpa5ss4ymuadgpq0ifz8";
+
+function buildDriveImages(folderId: string): GalleryImage[] {
+  const ids = KNOWN_DRIVE_FOLDERS[folderId] ?? [];
+  return ids.map((fid, fIdx) => {
+    const formatted = formatDriveImageUrl(fid);
+    const meta = KNOWN_DRIVE_PHOTOS[fid];
+    return {
+      id: `drive-${fid}`,
+      url: formatted.url,
+      thumbnailUrl: formatted.thumbnailUrl,
+      title: meta?.title || `Treatment Project #${fIdx + 1}`,
+      description:
+        meta?.description ||
+        "Field photo from Global Elite Pest Management treatment site in Chennai.",
+      isDrive: true,
+    };
+  });
+}
 
 /**
  * Extracts a Google Drive Folder ID from a link:
@@ -213,7 +145,8 @@ export function formatDriveImageUrl(fileId: string): { url: string; thumbnailUrl
   // thumbnail endpoint is also an extremely reliable fallback
   return {
     url: `https://lh3.googleusercontent.com/d/${fileId}`,
-    thumbnailUrl: `https://drive.google.com/thumbnail?id=${fileId}&sz=w800`,
+    // Same lh3 CDN, sized to 800px — avoids the extra drive.google.com 302 hop
+    thumbnailUrl: `https://lh3.googleusercontent.com/d/${fileId}=w800`,
   };
 }
 
@@ -227,11 +160,8 @@ export function parseGalleryImages(rawEnv?: string): {
 } {
   if (!rawEnv || typeof rawEnv !== "string" || !rawEnv.trim()) {
     return {
-      images: DEFAULT_GALLERY_ITEMS.map((item, index) => ({
-        ...item,
-        id: `default-${index}`,
-      })),
-      isFromEnv: false,
+      images: buildDriveImages(FALLBACK_DRIVE_FOLDER_ID),
+      isFromEnv: true,
     };
   }
 
@@ -260,11 +190,8 @@ export function parseGalleryImages(rawEnv?: string): {
 
   if (rawList.length === 0) {
     return {
-      images: DEFAULT_GALLERY_ITEMS.map((item, index) => ({
-        ...item,
-        id: `default-${index}`,
-      })),
-      isFromEnv: false,
+      images: buildDriveImages(FALLBACK_DRIVE_FOLDER_ID),
+      isFromEnv: true,
     };
   }
 
@@ -284,21 +211,7 @@ export function parseGalleryImages(rawEnv?: string): {
     // Check if entry is a Google Drive folder URL
     const folderId = extractGoogleDriveFolderId(urlString);
     if (folderId && KNOWN_DRIVE_FOLDERS[folderId]) {
-      const folderFiles = KNOWN_DRIVE_FOLDERS[folderId];
-      folderFiles.forEach((fid, fIdx) => {
-        const formatted = formatDriveImageUrl(fid);
-        const meta = KNOWN_DRIVE_PHOTOS[fid];
-        images.push({
-          id: `drive-${fid}`,
-          url: formatted.url,
-          thumbnailUrl: formatted.thumbnailUrl,
-          title: meta?.title || `Treatment Project #${fIdx + 1}`,
-          description:
-            meta?.description ||
-            "Field photo from Global Elite Pest Management treatment site in Chennai.",
-          isDrive: true,
-        });
-      });
+      images.push(...buildDriveImages(folderId));
       return;
     }
 

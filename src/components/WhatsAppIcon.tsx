@@ -15,4 +15,3 @@ export function WhatsAppIcon({ className = "size-5" }: { className?: string }) {
     </svg>
   );
 }
-

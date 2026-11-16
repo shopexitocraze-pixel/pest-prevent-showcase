@@ -60,7 +60,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Custom design tokens for VergeShield */
+  /* Custom design tokens for Global Elite Pest Management */
   --color-primary-light: var(--primary-light);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
@@ -151,10 +151,22 @@
     border-color: var(--color-border);
   }
 
+  html {
+    scroll-behavior: smooth;
+    /* Keeps anchor targets clear of the sticky navigation bar. */
+    scroll-padding-top: 5rem;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+  }
+
+  /* Consistent, visible keyboard focus on every interactive element. */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
   }
 }
 
@@ -181,28 +193,53 @@
 
 .grid-lines {
   background-image:
-    linear-gradient(to right, color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px);
+    linear-gradient(
+      to right,
+      color-mix(in oklab, var(--foreground) 6%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--foreground) 6%, transparent) 1px,
+      transparent 1px
+    );
   background-size: 64px 64px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent 75%);
 }
 
 .aurora {
   background:
-    radial-gradient(40rem 24rem at 15% 10%, color-mix(in oklab, var(--primary) 22%, transparent), transparent 70%),
-    radial-gradient(34rem 22rem at 85% 20%, color-mix(in oklab, var(--accent) 20%, transparent), transparent 70%);
+    radial-gradient(
+      40rem 24rem at 15% 10%,
+      color-mix(in oklab, var(--primary) 22%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      34rem 22rem at 85% 20%,
+      color-mix(in oklab, var(--accent) 20%, transparent),
+      transparent 70%
+    );
   filter: blur(8px);
   animation: aurora-drift 18s ease-in-out infinite alternate;
 }
 
 @keyframes aurora-drift {
-  from { transform: translate3d(-2%, -1%, 0) scale(1); }
-  to { transform: translate3d(3%, 2%, 0) scale(1.08); }
+  from {
+    transform: translate3d(-2%, -1%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(3%, 2%, 0) scale(1.08);
+  }
 }
 
 @keyframes float-soft {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .animate-float {
@@ -210,8 +247,12 @@
 }
 
 @keyframes marquee-x {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-marquee {
@@ -219,15 +260,24 @@
 }
 
 @keyframes sweep {
-  0% { transform: translateX(-120%) skewX(-12deg); }
-  100% { transform: translateX(220%) skewX(-12deg); }
+  0% {
+    transform: translateX(-120%) skewX(-12deg);
+  }
+  100% {
+    transform: translateX(220%) skewX(-12deg);
+  }
 }
 
 .sweep-on-hover::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent, color-mix(in oklab, white 35%, transparent), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, white 35%, transparent),
+    transparent
+  );
   transform: translateX(-120%) skewX(-12deg);
   pointer-events: none;
 }
@@ -237,9 +287,18 @@
 }
 
 @keyframes ring-pulse {
-  0% { transform: scale(0.9); opacity: 0.7; }
-  70% { transform: scale(1.6); opacity: 0; }
-  100% { transform: scale(1.6); opacity: 0; }
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
 }
 
 .animate-ring {
@@ -259,6 +318,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {

@@ -1,28 +1,58 @@
-# Pest Patrol Website
+# Global Elite Pest Management — Website
 
-create a  sample website pest control company
+Marketing website for a pest control company in Chennai (Ambattur). Single-page
+site built with [TanStack Start](https://tanstack.com/start) + React 19,
+Tailwind CSS v4 and Vite.
 
-This project was built with [Lovable](https://lovable.dev).
+**Live:** https://globalelitepestmanagement.in
 
-**Live app**: https://pest-prevent-showcase.lovable.app
+## Features
 
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/8b03f37e-f3cf-4e3b-b553-3f3e40754a98).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+- Full landing page: services, about, process, areas served, reviews, FAQ, contact
+- Contact form backed by a server function — sends an inquiry notification to the
+  business inbox plus an automatic confirmation reply to the customer (SMTP)
+- SEO: canonical/OG tags, JSON-LD (`LocalBusiness`, `FAQPage`, `WebSite`),
+  `sitemap.xml`, `robots.txt`, WebP imagery
+- Google Drive powered field-work gallery
 
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
 npm i
+cp .env.example .env   # then fill in the SMTP + site values
 npm run dev
 ```
 
+| Script            | Purpose                      |
+| ----------------- | ---------------------------- |
+| `npm run dev`     | Start the dev server         |
+| `npm run build`   | Production build             |
+| `npm run preview` | Preview the production build |
+| `npm run lint`    | ESLint                       |
+| `npm run format`  | Prettier                     |
 
+## Environment (`.env`)
+
+See `.env.example` for documentation on every variable.
+
+- `SITE_URL` — production origin (canonical/OG/sitemap must match it)
+- `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM`
+  — SMTP credentials for the contact form (server-side only, never `VITE_` prefixed)
+- `CONTACT_NOTIFY_TO`, `CONTACT_AUTO_REPLY` — where inquiries land / auto-reply toggle
+- `VITE_GALLERY_IMAGES` — Google Drive links for the work gallery
+- `VITE_GOOGLE_REVIEWS_URL` — Google Business Profile reviews link
+
+For production deploys (Cloudflare Workers), set the SMTP values as secrets:
+
+```sh
+npx wrangler secret put SMTP_HOST
+npx wrangler secret put SMTP_USER
+npx wrangler secret put SMTP_PASS
+# ...repeat for the other server-side variables
+```
+
+## Notes
+
+- Routes live in `src/routes/` (file-based routing; `routeTree.gen.ts` is
+  generated — don't edit it by hand).
+- Shared public constants (URL, phone, service areas) are in `src/lib/site.ts`.

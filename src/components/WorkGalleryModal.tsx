@@ -313,6 +313,17 @@ export function WorkGalleryModal({ open, onOpenChange }: WorkGalleryModalProps) 
               <img
                 src={activeImage.url}
                 alt={activeImage.title}
+                onError={(e) => {
+                  const el = e.currentTarget;
+                  const ai = activeImage;
+                  if (!ai) return;
+                  if (ai.isDrive && el.dataset["fb"] !== "1" && ai.thumbnailUrl) {
+                    el.dataset["fb"] = "1";
+                    el.src = ai.thumbnailUrl;
+                  } else {
+                    el.style.display = "none";
+                  }
+                }}
                 className="max-h-full max-w-full rounded-xl object-contain shadow-2xl transition-all duration-300"
               />
             </div>
